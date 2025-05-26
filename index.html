@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuestionario</title>
+</head>
+<body>
+  <h2>Formulario de Resultados</h2>
+  <form id="quiz-form">
+    <label>Nombre:
+      <input type="text" name="name" required>
+    </label><br><br>
+    <label>Puntaje:
+      <input type="text" name="score" required>
+    </label><br><br>
+    <label>Respuestas:
+      <textarea name="answers" rows="4" cols="40" required></textarea>
+    </label><br><br>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    document.getElementById("quiz-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      fetch("https://script.google.com/macros/s/AKfycbwLsFYFRE3EfwwfqjHb4llWzN5cQnypPIROui0XIXhbo64jkHC7yh20RnRKKqZ5PPUFHg/exec", {
+        method: "POST",
+        body: form
+      }).then(res => {
+        if (res.ok) {
+          alert("Respuestas enviadas correctamente");
+          e.target.reset();
+        } else {
+          alert("Hubo un error al enviar las respuestas");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
